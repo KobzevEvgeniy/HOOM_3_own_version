@@ -1,6 +1,9 @@
 package org.example.Abstract_heroes;
 
-public abstract class Warriors extends Hero {
+import org.example.All_Warriors_heroes.Attack;
+import org.example.GameInterface;
+
+public abstract class Warriors extends Hero implements GameInterface, Attack {
     /**
      * Сила наносимого урона за одну атаку
      */
@@ -11,8 +14,48 @@ public abstract class Warriors extends Hero {
      */
     public int protection;
 
+    /**
+     * Меткость стрельбы
+     */
+    public int accuracy;
 
 
+    public Warriors() {
+        super(
+                Warriors.r.nextInt(100, 200));
+        this.damage = 10;
+        this.protection = 50;
+        this.accuracy = 50;
+
+    }
+
+    public void step() {
+        System.out.println(getInfo() + "-ПОХОДИЛ");
+        attack();
+        getDamage();
+        die();
+
+    }
+
+    public void getDamage() {
+        if (this.health - damage > 0) {
+            this.health -= damage;
+        } else {
+            die();
+        }
 
 
+    }
+
+    public void attack(Hero target) {
+        int damage = Hero.r.nextInt(10, 20);
+        target.getDamage(damage);
+    }
+
+    public void attack(Hero target, int damage) {
+        damage = 10;
+        target.getDamage(damage);
+    }
 }
+
+

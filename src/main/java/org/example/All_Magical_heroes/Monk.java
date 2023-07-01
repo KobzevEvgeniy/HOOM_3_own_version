@@ -7,11 +7,14 @@ public class Monk extends Magical_Heroes implements Healing {
     private int harmony;
     private int maxHarmony;
 
+
     public Monk() {
-        super(String.format("Монах #%d", +Magical_Heroes.number),
-                Magical_Heroes.r.nextInt(100, 150));
+        super();
+        this.name= getName();
+        this.health= 150;
+        this.harmony = 100;
         this.maxHarmony = 100;
-        this.harmony = maxHarmony;
+
     }
 
     public String getInfo() {
@@ -25,5 +28,10 @@ public class Monk extends Magical_Heroes implements Healing {
             target.healed(health);
 
         }
+    }
+
+    @Override
+    public void attack() {
+
     }
 }

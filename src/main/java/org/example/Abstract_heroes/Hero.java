@@ -1,8 +1,8 @@
 package org.example.Abstract_heroes;
-
+import org.example.GameInterface;
 import java.util.Random;
 
-public abstract class Hero {
+public abstract class Hero implements GameInterface {
     /**
      * Номер по счету
      */
@@ -32,14 +32,15 @@ public abstract class Hero {
         Hero.number = 0;
         Hero.r = new Random();
     }
-    public Hero(String name, int health) {
+    public Hero(int health) {
+        String name=getName();
         this.name = name;
         this.health = health;
         this.maxHealth = health;
     }
 
     public Hero() {
-        this(String.format(" #%d", ++Hero.number),
+        this(
                 Hero.r.nextInt(100, 200));
     }
 
@@ -52,17 +53,23 @@ public abstract class Hero {
         this.health = Hp + this.health > this.maxHealth ? this.maxHealth : Hp+ this.health;
     }
 
-    protected void getDamage(int damage) {
-        if (this.health - damage > 0) {
-            this.health -= damage;
-        }
-        // else { die(); }
-    }
 
-/**
-    private static String getName(){
+    public static String getName(){
         String s = String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
         return s;
     }
- */
+
+    public void step(){
+        System.out.printf(getInfo()+"-ПОХОДИЛ");
+
+    }
+    public void die(){
+        if (health==0){
+           System.out.printf(getInfo()+"-УМЕР");
+        }
+
+    }
+
+    public void getDamage(int damage) {
+    }
 }
